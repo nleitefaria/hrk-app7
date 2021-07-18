@@ -120,9 +120,10 @@ public class MainLayout extends AppLayout {
 
     private List<Tab> createMenuItems() {
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
+        		new MenuItemInfo("About", "la la-file", AboutView.class), //
                 new MenuItemInfo("Hello World", "la la-globe", HelloWorldView.class), //
 
-                new MenuItemInfo("About", "la la-file", AboutView.class), //
+               
 
         };
         List<Tab> tabs = new ArrayList<>();
