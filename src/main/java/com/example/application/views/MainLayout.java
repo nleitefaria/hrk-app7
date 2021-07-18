@@ -23,6 +23,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.PageTitle;
 import com.example.application.views.MainLayout;
 import com.example.application.views.helloworld.HelloWorldView;
+import com.example.application.views.sevice1.Service1View;
 import com.example.application.views.about.AboutView;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
@@ -121,6 +122,7 @@ public class MainLayout extends AppLayout {
     private List<Tab> createMenuItems() {
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
         		new MenuItemInfo("About", "la la-file", AboutView.class), //
+        		new MenuItemInfo("Service1", "la la-file", Service1View.class), //
                 new MenuItemInfo("Hello World", "la la-globe", HelloWorldView.class), //
 
                
