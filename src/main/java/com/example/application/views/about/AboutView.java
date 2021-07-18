@@ -10,7 +10,12 @@ import com.example.application.views.MainLayout;
 @Route(value = "about", layout = MainLayout.class)
 public class AboutView extends Div {
 
-    public AboutView() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public AboutView() {
         addClassName("about-view");
         add(new Text("Content about placeholder"));
     }
