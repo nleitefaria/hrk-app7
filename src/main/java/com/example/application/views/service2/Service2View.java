@@ -6,7 +6,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@PageTitle("Sercive 2 ")
+@PageTitle("Service 2 ")
 @Route(value = "service2", layout = MainLayout.class)
 public class Service2View extends Div {
 
