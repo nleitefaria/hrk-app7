@@ -1,6 +1,7 @@
 package com.example.application.views.service2;
 
 import com.example.application.views.MainLayout;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -16,9 +17,8 @@ public class Service2View extends HorizontalLayout {
 	
 	
 	public Service2View() {
-        addClassName("service-2-view");
-        
-        setVerticalComponentAlignment(Alignment.END);
+		addClassName("about-view");
+        add(new Text("Content about service 2 placeholder"));
        
     }
 
