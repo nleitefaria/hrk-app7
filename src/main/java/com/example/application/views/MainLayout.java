@@ -121,7 +121,7 @@ public class MainLayout extends AppLayout {
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
         		new MenuItemInfo("About", "la la-file", AboutView.class), //
         		new MenuItemInfo("Contacts", "la la-file", ContactView.class), //
-        		new MenuItemInfo("Service2", "la la-file", CustomerView.class), //
+        		new MenuItemInfo("Customers", "la la-file", CustomerView.class), //
         };
         List<Tab> tabs = new ArrayList<>();
         for (MenuItemInfo menuItemInfo : menuItems) {
