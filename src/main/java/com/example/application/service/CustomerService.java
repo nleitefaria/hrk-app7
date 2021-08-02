@@ -1,46 +1,52 @@
 package com.example.application.service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.stereotype.Service;
 
 import com.example.application.entity.Customer;
 import com.example.application.enu.CustomerStatus;
+import com.example.application.repository.CustomerRepository;
 
-
+@Service
 public class CustomerService {
 	
-	private static CustomerService instance;
+	
 	private static final Logger LOGGER = Logger.getLogger(CustomerService.class.getName());
+	private CustomerRepository customerRepository;
 
 	private final HashMap<Long, Customer> contacts = new HashMap<>();
 	private long nextId = 0;
 
-	private CustomerService() {
+	public CustomerService(CustomerRepository customerRepository) {	
+		this.customerRepository = customerRepository;
 	}
 
 	/**
 	 * @return a reference to an example facade for Customer objects.
 	 */
-	public static CustomerService getInstance() {
+	/*
+	public CustomerService getInstance() {
 		if (instance == null) {
-			instance = new CustomerService();
-			instance.ensureTestData();
+			instance = new CustomerService(customerRepository);
+			//instance.ensureTestData();
 		}
 		return instance;
 	}
+	*/
 
 	/**
 	 * @return all available Customer objects.
 	 */
 	public synchronized List<Customer> findAll() {
-		return findAll(null);
+		//return findAll(null);
+		return customerRepository.findAll();
 	}
 
 	/**
@@ -51,6 +57,7 @@ public class CustomerService {
 	 *            if all objects should be returned.
 	 * @return list a Customer objects
 	 */
+	/*
 	public synchronized List<Customer> findAll(String stringFilter) {
 		ArrayList<Customer> arrayList = new ArrayList<>();
 		for (Customer contact : contacts.values()) {
@@ -73,6 +80,7 @@ public class CustomerService {
 		});
 		return arrayList;
 	}
+	*/
 
 	/**
 	 * Finds all Customer's that match given filter and limits the resultset.
@@ -86,6 +94,7 @@ public class CustomerService {
 	 *            maximum result count
 	 * @return list a Customer objects
 	 */
+	/*
 	public synchronized List<Customer> findAll(String stringFilter, int start, int maxresults) {
 		ArrayList<Customer> arrayList = new ArrayList<>();
 		for (Customer contact : contacts.values()) {
@@ -112,6 +121,7 @@ public class CustomerService {
 		}
 		return arrayList.subList(start, end);
 	}
+	*/
 
 	/**
 	 * @return the amount of all customers in the system
@@ -136,6 +146,7 @@ public class CustomerService {
 	 *
 	 * @param entry
 	 */
+	/*
 	public synchronized void save(Customer entry) {
 		if (entry == null) {
 			LOGGER.log(Level.SEVERE,
@@ -152,10 +163,12 @@ public class CustomerService {
 		}
 		contacts.put(entry.getId(), entry);
 	}
+	*/
 
 	/**
 	 * Sample data generation
 	 */
+	/*
 	public void ensureTestData() {
 		if (findAll().isEmpty()) {
 			final String[] names = new String[] { "Gabrielle Patel", "Brian Robinson", "Eduardo Haugen",
@@ -177,6 +190,33 @@ public class CustomerService {
 			}
 		}
 	}
-
-
+	*/
+	
+	@PostConstruct 
+	public void populateTestData() {
+		
+		if (customerRepository.count() == 0) {
+			//TODO FINISH THIS
+			
+			final String[] names = new String[] { "Gabrielle Patel", "Brian Robinson", "Eduardo Haugen",
+					"Koen Johansen", "Alejandro Macdonald", "Angel Karlsson", "Yahir Gustavsson", "Haiden Svensson",
+					"Emily Stewart", "Corinne Davis", "Ryann Davis", "Yurem Jackson", "Kelly Gustavsson",
+					"Eileen Walker", "Katelyn Martin", "Israel Carlsson", "Quinn Hansson", "Makena Smith",
+					"Danielle Watson", "Leland Harris", "Gunner Karlsen", "Jamar Olsson", "Lara Martin",
+					"Ann Andersson", "Remington Andersson", "Rene Carlsson", "Elvis Olsen", "Solomon Olsen",
+					"Jaydan Jackson", "Bernard Nilsen" };
+			Random r = new Random(0);
+			for (String name : names) {
+				String[] split = name.split(" ");
+				Customer c = new Customer();
+				c.setFirstName(split[0]);
+				c.setLastName(split[1]);
+				c.setStatus(CustomerStatus.values()[r.nextInt(CustomerStatus.values().length)]);
+				c.setBirthDate(LocalDate.now().minusDays(r.nextInt(365*100)));
+				customerRepository.save(c);
+			
+			
+			}
+		}
+	}
 }
