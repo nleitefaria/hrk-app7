@@ -12,7 +12,11 @@ import com.vaadin.flow.router.Route;
 @Route(value = "service1", layout = MainLayout.class)
 public class ContactView extends VerticalLayout {
 
-    private ContactService contactService;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ContactService contactService;
     private Grid<Contact> grid = new Grid<>(Contact.class);
 
     public ContactView(ContactService contactService) {
