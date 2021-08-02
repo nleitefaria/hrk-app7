@@ -17,7 +17,7 @@ public class AboutView extends Div {
 
 	public AboutView() {
         addClassName("about-view");
-        add(new Text("Content about placeholder"));
+        add(new Text("This project is a simple POC developed for a company"));
     }
 
 }

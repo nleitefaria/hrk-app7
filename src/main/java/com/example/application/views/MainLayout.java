@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import com.example.application.views.about.AboutView;
 import com.example.application.views.contact.ContactView;
-import com.example.application.views.service2.Service2View;
+import com.example.application.views.customer.CustomerView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.Text;
@@ -121,7 +121,7 @@ public class MainLayout extends AppLayout {
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
         		new MenuItemInfo("About", "la la-file", AboutView.class), //
         		new MenuItemInfo("Contacts", "la la-file", ContactView.class), //
-        		new MenuItemInfo("Service2", "la la-file", Service2View.class), //
+        		new MenuItemInfo("Service2", "la la-file", CustomerView.class), //
         };
         List<Tab> tabs = new ArrayList<>();
         for (MenuItemInfo menuItemInfo : menuItems) {
