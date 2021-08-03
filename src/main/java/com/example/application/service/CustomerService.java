@@ -1,10 +1,14 @@
 package com.example.application.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import javax.annotation.PostConstruct;
 
@@ -28,24 +32,11 @@ public class CustomerService {
 		this.customerRepository = customerRepository;
 	}
 
-	/**
-	 * @return a reference to an example facade for Customer objects.
-	 */
-	/*
-	public CustomerService getInstance() {
-		if (instance == null) {
-			instance = new CustomerService(customerRepository);
-			//instance.ensureTestData();
-		}
-		return instance;
-	}
-	*/
 
 	/**
 	 * @return all available Customer objects.
 	 */
 	public synchronized List<Customer> findAll() {
-		//return findAll(null);
 		return customerRepository.findAll();
 	}
 
@@ -57,30 +48,20 @@ public class CustomerService {
 	 *            if all objects should be returned.
 	 * @return list a Customer objects
 	 */
-	/*
-	public synchronized List<Customer> findAll(String stringFilter) {
-		ArrayList<Customer> arrayList = new ArrayList<>();
-		for (Customer contact : contacts.values()) {
-			try {
-				boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
-						|| contact.toString().toLowerCase().contains(stringFilter.toLowerCase());
-				if (passesFilter) {
-					arrayList.add(contact.clone());
-				}
-			} catch (CloneNotSupportedException ex) {
-				Logger.getLogger(CustomerService.class.getName()).log(Level.SEVERE, null, ex);
-			}
+	
+	public synchronized List<Customer> findAll(String stringFilter)
+	{		
+		if(stringFilter.length() == 0)
+		{
+			return this.findAll();
+			
 		}
-		Collections.sort(arrayList, new Comparator<Customer>() {
-
-			@Override
-			public int compare(Customer o1, Customer o2) {
-				return (int) (o2.getId() - o1.getId());
-			}
-		});
-		return arrayList;
+		else
+		{
+			return customerRepository.findByFirstName(stringFilter);			
+		}
 	}
-	*/
+	
 
 	/**
 	 * Finds all Customer's that match given filter and limits the resultset.

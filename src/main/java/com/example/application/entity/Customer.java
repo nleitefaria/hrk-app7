@@ -1,5 +1,6 @@
 package com.example.application.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -7,7 +8,7 @@ import javax.persistence.Entity;
 import com.example.application.enu.CustomerStatus;
 
 @Entity
-public class Customer extends AbstractEntity {
+public class Customer extends AbstractEntity implements Serializable, Cloneable {
 
 	
 	private String firstName = "";
@@ -111,4 +112,9 @@ public class Customer extends AbstractEntity {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+	
+	@Override
+    public Customer clone() throws CloneNotSupportedException {
+        return (Customer) super.clone();
+    }
 }
