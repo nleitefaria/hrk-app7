@@ -3,9 +3,9 @@ package com.example.application.views.customer;
 import com.example.application.entity.Customer;
 import com.example.application.service.CustomerService;
 import com.example.application.views.MainLayout;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
@@ -15,22 +15,22 @@ import com.vaadin.flow.router.Route;
 @Route(value = "service2", layout = MainLayout.class)
 public class CustomerView extends Div {
 
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private CustomerService customerService;
 	
     private Grid<Customer> grid = new Grid<>(Customer.class);
     private TextField filterText = new TextField();
+    
+    private CustomerForm form;
 	
 	
 	public CustomerView(CustomerService customerService) {
 		this.customerService = customerService; 
 		addClassName("customer-view");
         
+		form = new CustomerForm(this, customerService);
+		
 		filterText.setPlaceholder("Filter by First name...");
 	    filterText.setClearButtonVisible(true);
 	    filterText.setValueChangeMode(ValueChangeMode.EAGER);
@@ -39,9 +39,15 @@ public class CustomerView extends Div {
         grid.setColumns("firstName", "lastName", "status");
         grid.addClassName("contact-grid");
         grid.setSizeFull();
-        add(filterText, grid);
+        add(filterText);
         setSizeFull();        
-        findAll();    
+        findAll();  
+        
+        HorizontalLayout mainContent = new HorizontalLayout(grid, form);
+        mainContent.setSizeFull();
+        grid.setSizeFull();
+
+        add(filterText, mainContent);   
     }
 	
 	public void findAll() {
@@ -51,4 +57,11 @@ public class CustomerView extends Div {
 	public void updateList() {
         grid.setItems(customerService.findAll(filterText.getValue()));
     }
+	
+	public void updateListAfterSaving() {
+		grid.setItems(customerService.findAll());
+	}
+	
+	
+	
 }
