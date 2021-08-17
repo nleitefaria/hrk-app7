@@ -19,9 +19,12 @@ public class CountryView extends VerticalLayout {
 
 	public CountryView(@Autowired RestClientService service)
 	{
-		final Grid<CountryDTO> commentsGrid = new Grid<CountryDTO>(CountryDTO.class);
+		final Grid<CountryDTO> countriesGrid = new Grid<CountryDTO>(CountryDTO.class);
 		// Fetch all entities and show		
-		commentsGrid.setItems(service.getAllCountries());
-		add(commentsGrid);		
+		countriesGrid.setItems(service.getAllCountries());
+		countriesGrid.setWidth("100%");
+		countriesGrid.setWidthFull();
+		countriesGrid.setHeightByRows(true);
+		add(countriesGrid);		
 	}
 }
