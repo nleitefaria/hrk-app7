@@ -3,11 +3,13 @@ package com.example.application.service;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 
 import com.example.application.dto.CountryDTO;
 
+@Service
 public class RestClientService implements Serializable 
 {
 	private static final long serialVersionUID = 1L;
